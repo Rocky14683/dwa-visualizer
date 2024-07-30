@@ -56,10 +56,10 @@ impl BarrierManager {
             window_height,
         }
     }
-    pub fn get_shortest_to_barrier(&self, position: Pose) -> f64 {
+    pub fn get_shortest_to_barrier(&self, position: Pose, robot_radius: f64) -> f64 {
         let mut shortest = f64::MAX;
         for barrier in self.barriers.iter().skip(self.target_idx) {
-            let distance = barrier.get_distance(position.position.clone());
+            let distance = barrier.get_distance(position.position.clone()) + barrier.radius;
             if distance < shortest {
                 shortest = distance;
             }

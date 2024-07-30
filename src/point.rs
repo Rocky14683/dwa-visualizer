@@ -1,7 +1,7 @@
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Debug)]
 pub struct Point {
     pub x: f64,
-    pub y: f64
+    pub y: f64,
 }
 
 impl Point {
@@ -10,7 +10,7 @@ impl Point {
     }
 
     pub fn get_angle(&self, other: Point) -> f64 {
-        (other.y - self.y).atan2(other.x - self.x)
+        ((other.y - self.y) / (other.x - self.x)).atan()
     }
 
     pub fn to_vector2(&self) -> raylib::math::Vector2 {
@@ -19,16 +19,13 @@ impl Point {
 }
 
 
-
-
 #[derive(Copy, Clone)]
 pub struct Pose {
     pub position: Point,
-    pub orientation: f64
+    pub orientation: f64,
 }
 
 impl Pose {
-
     pub fn get_distance(&self, other: Pose) -> f64 {
         self.position.get_distance(other.position)
     }
